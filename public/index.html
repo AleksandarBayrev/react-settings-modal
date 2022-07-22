@@ -30,7 +30,9 @@
         document.getElementById('active-settings').innerHTML = JSON.stringify(state);
       }
       window.addEventListener('load', function() {
-        window.updateActiveSettings('Settings will be displayed here')
+        const settingsInStore = window.sessionStorage.getItem(window.settingsModalConstants.sessionStorageKey)
+        console.log(`Settings in sessionStorage: ${settingsInStore}`);
+        window.updateActiveSettings(settingsInStore ? JSON.parse(JSON.stringify(settingsInStore)) : 'Settings will be displayed here if present')
       });
       window.loadSettingsModal = function (elementId) {
         if (!RenderSettingsModal) {

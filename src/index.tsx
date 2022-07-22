@@ -8,6 +8,9 @@ import { MessagePublisher } from './utils/MessagePublisher';
 
 const messagePublisher: IMessagePublisher = new MessagePublisher()
 window.messagePublisherInstance = messagePublisher
+window.settingsModalConstants = {
+  sessionStorageKey
+};
 window.RenderSettingsModal = function(elementId: string) {
   let modalSettingsStorage: string | null = window.sessionStorage.getItem(sessionStorageKey);
   let modalSettings: SettingsModalState = {
