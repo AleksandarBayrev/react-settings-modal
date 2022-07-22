@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsModal renders with settings off 1`] = `
+<div
+  className="settings-modal-container"
+>
+  <div
+    className="settings-modal-api-enabled"
+  >
+    <div
+      className="checkbox"
+    >
+      <input
+        checked={false}
+        onChange={[Function]}
+        type="checkbox"
+      />
+    </div>
+    <div
+      className="label"
+      onClick={[Function]}
+    >
+      Is API Enabled
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SettingsModal renders with settings on 1`] = `
+<div
+  className="settings-modal-container"
+>
+  <div
+    className="settings-modal-api-enabled"
+  >
+    <div
+      className="checkbox"
+    >
+      <input
+        checked={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+    </div>
+    <div
+      className="label"
+      onClick={[Function]}
+    >
+      Is API Enabled
+    </div>
+  </div>
+</div>
+`;
