@@ -37,7 +37,7 @@
           throw new Error('Missing SettingsModal.js');
         }
         RenderSettingsModal(elementId);
-        window.messagePublisherInstance.subscribe('settingsUpdated', (state) => {
+        window.messagePublisherInstance.subscribe('settingsUpdated', function(state) {
           console.log(state);
           window.updateActiveSettings(state);
         });
