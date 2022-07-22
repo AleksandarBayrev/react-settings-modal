@@ -26,11 +26,21 @@
     -->
     <title>Settings Modal</title>
     <script>
+      window.updateActiveSettings = function(state) {
+        document.getElementById('active-settings').innerHTML = JSON.stringify(state);
+      }
+      window.addEventListener('load', function() {
+        window.updateActiveSettings('Settings will be displayed here')
+      });
       window.loadSettingsModal = function (elementId) {
         if (!RenderSettingsModal) {
           throw new Error('Missing SettingsModal.js');
         }
-        RenderSettingsModal(elementId)
+        RenderSettingsModal(elementId);
+        window.messagePublisherInstance.subscribe('settingsUpdated', (state) => {
+          console.log(state);
+          window.updateActiveSettings(state);
+        });
       };
     </script>
   </head>
@@ -38,6 +48,7 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <button onclick="loadSettingsModal('root')">Render modal</button>
     <div id="root"></div>
+    <div id="active-settings"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

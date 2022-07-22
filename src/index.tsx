@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { sessionStorageKey } from './constants';
+import { IMessagePublisher } from './interfaces';
 import reportWebVitals from './reportWebVitals';
 import { SettingsModal, SettingsModalState } from './SettingsModal';
+import { MessagePublisher } from './utils/MessagePublisher';
 
+const messagePublisher: IMessagePublisher = new MessagePublisher()
+window.messagePublisherInstance = messagePublisher
 window.RenderSettingsModal = function(elementId: string) {
   let modalSettingsStorage: string | null = window.sessionStorage.getItem(sessionStorageKey);
   let modalSettings: SettingsModalState = {
@@ -17,7 +21,10 @@ window.RenderSettingsModal = function(elementId: string) {
   );
   root.render(
     <React.StrictMode>
-      <SettingsModal isAPIEnabled={modalSettings.isAPIEnabled} />
+      <SettingsModal 
+        messagePublisher={messagePublisher}
+        state={modalSettings}
+      />
     </React.StrictMode>
   );
 }

@@ -1,8 +1,10 @@
 import React from 'react';
 import { sessionStorageKey } from './constants';
+import { IMessagePublisher } from './interfaces';
 
 export type SettingsModalProps = {
-    isAPIEnabled: boolean;
+    messagePublisher: IMessagePublisher
+    state: SettingsModalState
 }
 
 export type SettingsModalState = {
@@ -10,24 +12,22 @@ export type SettingsModalState = {
 }
 
 export class SettingsModal extends React.Component<SettingsModalProps, SettingsModalState> {
-    private checkboxRef: React.LegacyRef<HTMLInputElement> | null = null;
+    private readonly messagePublisher: IMessagePublisher;
     constructor(props: SettingsModalProps) {
         super(props);
-        this.checkboxRef = React.createRef();
+        this.messagePublisher = props.messagePublisher;
         this.state = {
-            isAPIEnabled: props.isAPIEnabled
+            isAPIEnabled: props.state.isAPIEnabled
         };
     }
 
-    private onSettingChange(settingName: keyof SettingsModalState, settingValue: any, checkboxRef: React.LegacyRef<HTMLInputElement> | null = null) {
+    private onSettingChange(settingName: keyof SettingsModalState, settingValue: any) {
         this.setState({
             [settingName]: settingValue
         });
         setTimeout(() => {
             window.sessionStorage.setItem(sessionStorageKey, JSON.stringify(this.state));
-            if (checkboxRef) {
-                (checkboxRef as any).checked = Boolean(settingValue)
-            }
+            this.messagePublisher.publish('settingsUpdated', this.state);
         });
     }
 
@@ -37,7 +37,6 @@ export class SettingsModal extends React.Component<SettingsModalProps, SettingsM
                 <div className='settings-modal-api-enabled'>
                     <div className='checkbox'>
                         <input 
-                            ref={this.checkboxRef}
                             type='checkbox'
                             onChange={(e) => this.onSettingChange('isAPIEnabled', !this.state.isAPIEnabled)}
                             checked={this.state.isAPIEnabled}
@@ -45,7 +44,7 @@ export class SettingsModal extends React.Component<SettingsModalProps, SettingsM
                     </div>
                     <div
                         className='label'
-                        onClick={() => this.onSettingChange('isAPIEnabled', !this.state.isAPIEnabled, this.checkboxRef)}
+                        onClick={() => this.onSettingChange('isAPIEnabled', !this.state.isAPIEnabled)}
                     >Is API Enabled</div>
                 </div>
             </div>

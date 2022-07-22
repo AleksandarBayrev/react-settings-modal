@@ -11,7 +11,7 @@ exports[`SettingsModal renders with settings off 1`] = `
       className="checkbox"
     >
       <input
-        checked={false}
+        checked={true}
         onChange={[Function]}
         type="checkbox"
       />
@@ -37,7 +37,7 @@ exports[`SettingsModal renders with settings on 1`] = `
       className="checkbox"
     >
       <input
-        checked={true}
+        checked={false}
         onChange={[Function]}
         type="checkbox"
       />
