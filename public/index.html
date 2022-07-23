@@ -14,12 +14,15 @@
     <title>Settings Modal</title>
     <script>
       window.updateActiveSettings = function(state) {
-        document.getElementById('active-settings').innerHTML = JSON.stringify(state);
+        let result = state.length != 0 ? 'Settings in sessionStorage:<br />' : '';
+        state.map(x => result += x + '<br />');
+        document.getElementById('active-settings').innerHTML = result;
       }
       window.addEventListener('load', function() {
-        const settingsInStore = window.sessionStorage.getItem(window.settingsModalConstants.sessionStorageKey)
+        const settingsInStore = window.sessionStorage.getItem(window.settingsModalConstants.sessionStorageKey);
         console.log(`Settings in sessionStorage: ${settingsInStore}`);
-        window.updateActiveSettings(settingsInStore ? JSON.parse(settingsInStore) : 'Settings will be displayed here if present')
+        const parsedState = JSON.parse(settingsInStore);
+        window.updateActiveSettings(settingsInStore ? Object.keys(parsedState).map(x => `${x} = ${parsedState[x]}`) : ['Settings will be displayed here if present'])
       });
       window.loadSettingsModal = async function (elementId) {
         if (!RenderSettingsModal) {
@@ -28,7 +31,7 @@
         RenderSettingsModal(elementId);
         await window.messagePublisherInstance.subscribe('settingsUpdated', function(state) {
           console.log(state);
-          window.updateActiveSettings(state);
+          window.updateActiveSettings(Object.keys(state).map(x => `${x}:${state[x]}`));
         });
       };
     </script>
