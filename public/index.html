@@ -19,7 +19,7 @@
       window.addEventListener('load', function() {
         const settingsInStore = window.sessionStorage.getItem(window.settingsModalConstants.sessionStorageKey)
         console.log(`Settings in sessionStorage: ${settingsInStore}`);
-        window.updateActiveSettings(settingsInStore ? JSON.parse(JSON.stringify(settingsInStore)) : 'Settings will be displayed here if present')
+        window.updateActiveSettings(settingsInStore ? JSON.parse(settingsInStore) : 'Settings will be displayed here if present')
       });
       window.loadSettingsModal = async function (elementId) {
         if (!RenderSettingsModal) {
