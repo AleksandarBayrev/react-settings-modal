@@ -6,8 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { SettingsModal, SettingsModalState } from './SettingsModal';
 import { MessagePublisher } from './utils/MessagePublisher';
 
-const messagePublisher: IMessagePublisher = new MessagePublisher()
-window.messagePublisherInstance = messagePublisher
+const messagePublisher: IMessagePublisher = new MessagePublisher();
+window.messagePublisherInstance = messagePublisher;
 window.settingsModalConstants = {
   sessionStorageKey
 };

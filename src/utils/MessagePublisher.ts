@@ -1,7 +1,7 @@
 import { IMessagePublisher, MessagePublisherCallback } from "../interfaces";
 
 export type MessagePublisherSubscriptions = {
-    [key: string]: MessagePublisherCallback[]
+    [key: string]: MessagePublisherCallback[];
 }
 
 export class MessagePublisher implements IMessagePublisher {

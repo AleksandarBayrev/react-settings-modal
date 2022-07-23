@@ -3,8 +3,8 @@ import { sessionStorageKey } from './constants';
 import { IMessagePublisher } from './interfaces';
 
 export type SettingsModalProps = {
-    messagePublisher: IMessagePublisher
-    state: SettingsModalState
+    messagePublisher: IMessagePublisher;
+    state: SettingsModalState;
 }
 
 export type SettingsModalState = {
@@ -48,6 +48,6 @@ export class SettingsModal extends React.Component<SettingsModalProps, SettingsM
                     >Is API Enabled</div>
                 </div>
             </div>
-        )
+        );
     }
 }

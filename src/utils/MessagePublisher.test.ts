@@ -11,6 +11,27 @@ describe('MessagePublisher', () => {
         await publisher.subscribe('test', callback);
         expect((publisher as any)['subscriptions']['test'].length).toEqual(1)
     });
+    it('publish to topic with no subscriptions', async () => {
+        try {
+            await publisher.publish('test');
+        } catch (err) {
+            expect(err).toEqual('No subscribers for test available');
+        }
+    });
+    it('unsubscribeOne to topic with no subscriptions', async () => {
+        try {
+            await publisher.unsubscribeOne('test');
+        } catch (err) {
+            expect(err).toEqual('No subscribers for test available');
+        }
+    });
+    it('unsubscribeAll to topic with no subscriptions', async () => {
+        try {
+            await publisher.unsubscribeAll('test');
+        } catch (err) {
+            expect(err).toEqual('No subscribers for test available');
+        }
+    });
     it('subscribes to topic', async () => {
         const callback = jest.fn(async (data) => {});
         const data = {test: 1};
