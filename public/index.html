@@ -34,12 +34,12 @@
         console.log(`Settings in sessionStorage: ${settingsInStore}`);
         window.updateActiveSettings(settingsInStore ? JSON.parse(JSON.stringify(settingsInStore)) : 'Settings will be displayed here if present')
       });
-      window.loadSettingsModal = function (elementId) {
+      window.loadSettingsModal = async function (elementId) {
         if (!RenderSettingsModal) {
           throw new Error('Missing SettingsModal.js');
         }
         RenderSettingsModal(elementId);
-        window.messagePublisherInstance.subscribe('settingsUpdated', function(state) {
+        await window.messagePublisherInstance.subscribe('settingsUpdated', function(state) {
           console.log(state);
           window.updateActiveSettings(state);
         });

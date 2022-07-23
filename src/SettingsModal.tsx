@@ -25,9 +25,9 @@ export class SettingsModal extends React.Component<SettingsModalProps, SettingsM
         this.setState({
             [settingName]: settingValue
         });
-        setTimeout(() => {
+        setTimeout(async () => {
             window.sessionStorage.setItem(sessionStorageKey, JSON.stringify(this.state));
-            this.messagePublisher.publish('settingsUpdated', this.state);
+            await this.messagePublisher.publish('settingsUpdated', this.state);
         });
     }
 
