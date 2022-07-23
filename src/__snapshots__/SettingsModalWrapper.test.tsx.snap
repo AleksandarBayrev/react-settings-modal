@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsModalWrapper does not render SettingsModal 1`] = `
+<div
+  className="settings-modal-wrapper"
+>
+  <div
+    className="open-modal"
+    onClick={[Function]}
+  >
+    Open modal
+  </div>
+  <div
+    className="close-modal"
+    onClick={[Function]}
+  >
+    Close modal
+  </div>
+</div>
+`;
+
+exports[`SettingsModalWrapper renders SettingsModal on clicking openModal 1`] = `
+<div
+  className="settings-modal-wrapper"
+>
+  <div
+    className="open-modal"
+    onClick={[Function]}
+  >
+    Open modal
+  </div>
+  <div
+    className="close-modal"
+    onClick={[Function]}
+  >
+    Close modal
+  </div>
+</div>
+`;

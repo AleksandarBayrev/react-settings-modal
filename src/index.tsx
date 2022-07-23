@@ -4,6 +4,7 @@ import { sessionStorageKey } from './constants';
 import { IMessagePublisher } from './interfaces';
 import reportWebVitals from './reportWebVitals';
 import { SettingsModal, SettingsModalState } from './SettingsModal';
+import { SettingsModalWrapper } from './SettingsModalWrapper';
 import { MessagePublisher } from './utils/MessagePublisher';
 
 const messagePublisher: IMessagePublisher = new MessagePublisher();
@@ -29,7 +30,7 @@ window.RenderSettingsModal = function(elementId: string) {
   );
   root.render(
     <React.StrictMode>
-      <SettingsModal 
+      <SettingsModalWrapper 
         messagePublisher={messagePublisher}
         state={modalSettings}
       />
