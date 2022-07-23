@@ -7,11 +7,16 @@ import { SettingsModal, SettingsModalState } from './SettingsModal';
 import { MessagePublisher } from './utils/MessagePublisher';
 
 const messagePublisher: IMessagePublisher = new MessagePublisher();
+let isComponentRendered = false;
 window.messagePublisherInstance = messagePublisher;
 window.settingsModalConstants = {
   sessionStorageKey
 };
 window.RenderSettingsModal = function(elementId: string) {
+  if (isComponentRendered) {
+    throw new Error('Component SettingsModalState is already rendered!');
+  }
+  isComponentRendered = true;
   let modalSettingsStorage: string | null = window.sessionStorage.getItem(sessionStorageKey);
   let modalSettings: SettingsModalState = {
     isAPIEnabled: false
