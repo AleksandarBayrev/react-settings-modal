@@ -13,6 +13,9 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Settings Modal</title>
     <script>
+      window.stateMapper = function (x) {
+        return `${x} = ${state[x]}`;
+      }
       window.updateActiveSettings = function(state) {
         let result = state.length != 0 ? 'Settings in sessionStorage:<br />' : '';
         state.map(x => result += x + '<br />');
@@ -22,7 +25,7 @@
         const settingsInStore = window.sessionStorage.getItem(window.settingsModalConstants.sessionStorageKey);
         console.log(`Settings in sessionStorage: ${settingsInStore}`);
         const parsedState = JSON.parse(settingsInStore);
-        window.updateActiveSettings(settingsInStore ? Object.keys(parsedState).map(x => `${x} = ${parsedState[x]}`) : ['Settings will be displayed here if present'])
+        window.updateActiveSettings(settingsInStore ? Object.keys(parsedState).map(window.stateMapper) : ['Settings will be displayed here if present'])
       });
       window.loadSettingsModal = async function (elementId) {
         if (!RenderSettingsModal) {
@@ -31,7 +34,7 @@
         RenderSettingsModal(elementId);
         await window.messagePublisherInstance.subscribe('settingsUpdated', function(state) {
           console.log(state);
-          window.updateActiveSettings(Object.keys(state).map(x => `${x}:${state[x]}`));
+          window.updateActiveSettings(Object.keys(state).map(window.stateMapper));
         });
       };
     </script>
