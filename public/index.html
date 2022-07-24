@@ -37,11 +37,18 @@
           window.updateActiveSettings(Object.keys(state).map((x) => window.stateMapper(x, state)));
         });
       };
+      window.unloadSettingsModal = function (elementId) {
+        if (!DestroySettingsModal) {
+          throw new Error('Missing SettingsModal.js');
+        }
+        DestroySettingsModal(elementId);
+      };
     </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <button onclick="loadSettingsModal('root')">Render modal</button>
+    <button onclick="unloadSettingsModal('root')">Unload modal</button>
     <div id="root"></div>
     <div id="separator">Everything below this point is not a part of the React component</div>
     <div id="active-settings"></div>

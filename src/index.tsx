@@ -9,6 +9,7 @@ import { MessagePublisher } from './utils/MessagePublisher';
 
 const messagePublisher: IMessagePublisher = new MessagePublisher();
 let isComponentRendered = false;
+let root: ReactDOM.Root | undefined 
 window.messagePublisherInstance = messagePublisher;
 window.settingsModalConstants = {
   sessionStorageKey
@@ -17,7 +18,6 @@ window.RenderSettingsModal = function(elementId: string) {
   if (isComponentRendered) {
     throw new Error('Component SettingsModalState is already rendered!');
   }
-  isComponentRendered = true;
   let modalSettingsStorage: string | null = window.sessionStorage.getItem(sessionStorageKey);
   let modalSettings: SettingsModalState = {
     isAPIEnabled: false
@@ -25,9 +25,11 @@ window.RenderSettingsModal = function(elementId: string) {
   if (modalSettingsStorage) {
     modalSettings = JSON.parse(modalSettingsStorage);
   }
-  const root = ReactDOM.createRoot(
-    document.getElementById(elementId) as HTMLElement
-  );
+  if (!root) {
+    root = ReactDOM.createRoot(
+      document.getElementById(elementId) as HTMLElement
+    );
+  }
   root.render(
     <React.StrictMode>
       <SettingsModalWrapper 
@@ -36,6 +38,16 @@ window.RenderSettingsModal = function(elementId: string) {
       />
     </React.StrictMode>
   );
+  isComponentRendered = true;
+}
+
+window.DestroySettingsModal = async function(elementId: string) {
+  if (root) {
+    root.unmount();
+    isComponentRendered = false;
+    await messagePublisher.unsubscribeAll('settingsUpdated');
+    root = undefined;
+  }
 }
 
 // If you want to start measuring performance in your app, pass a function
