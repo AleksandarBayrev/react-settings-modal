@@ -8,7 +8,8 @@ describe('SettingsModal', () => {
         const component = renderer.create(<SettingsModal
             messagePublisher={new MessagePublisher}
             state={{
-                isAPIEnabled: false
+                isAPIEnabled: false,
+                defaultText: 'Hello there'
         }} />).toJSON();
         expect(component).toMatchSnapshot();
     });
@@ -16,7 +17,8 @@ describe('SettingsModal', () => {
         const component = renderer.create(<SettingsModal
             messagePublisher={new MessagePublisher}
             state={{
-                isAPIEnabled: true
+                isAPIEnabled: true,
+                defaultText: 'Hello there'
         }} />).toJSON();
         expect(component).toMatchSnapshot();
     });

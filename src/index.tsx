@@ -20,7 +20,8 @@ window.RenderSettingsModal = function(elementId: string) {
   }
   let modalSettingsStorage: string | null = window.sessionStorage.getItem(sessionStorageKey);
   let modalSettings: SettingsModalState = {
-    isAPIEnabled: false
+    isAPIEnabled: false,
+    defaultText: ''
   };
   if (modalSettingsStorage) {
     modalSettings = JSON.parse(modalSettingsStorage);

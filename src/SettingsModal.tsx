@@ -10,6 +10,7 @@ export type SettingsModalProps = {
 
 export type SettingsModalState = {
     isAPIEnabled: boolean;
+    defaultText: string;
 }
 
 export class SettingsModal extends React.Component<SettingsModalProps, SettingsModalState> {
@@ -19,14 +20,15 @@ export class SettingsModal extends React.Component<SettingsModalProps, SettingsM
         super(props);
         this.messagePublisher = props.messagePublisher;
         this.state = {
-            isAPIEnabled: props.state.isAPIEnabled
+            isAPIEnabled: props.state.isAPIEnabled,
+            defaultText: props.state.defaultText
         };
     }
 
     private onSettingChange(settingName: keyof SettingsModalState, settingValue: any) {
         this.setState({
             [settingName]: settingValue
-        });
+        } as SettingsModalState);
         setTimeout(async () => {
             window.sessionStorage.setItem(sessionStorageKey, JSON.stringify(this.state));
             await this.messagePublisher.publish('settingsUpdated', this.state);
@@ -48,6 +50,16 @@ export class SettingsModal extends React.Component<SettingsModalProps, SettingsM
                         className='label-wrapper'
                         onClick={() => this.onSettingChange('isAPIEnabled', !this.state.isAPIEnabled)}
                     ><span className='label'>Is API Enabled</span></div>
+                </div>
+                <div className='settings-modal-default-text'>
+                    <div className='text'>
+                        <input
+                            type='text'
+                            onInput={(e) => this.onSettingChange('defaultText', (e.target as any).value)}
+                            value={this.state.defaultText}
+                            placeholder={'Default Text'}
+                        />
+                    </div>
                 </div>
             </div>
         );
