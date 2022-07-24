@@ -17,10 +17,14 @@ exports[`SettingsModal renders with settings off 1`] = `
       />
     </div>
     <div
-      className="label"
+      className="label-wrapper"
       onClick={[Function]}
     >
-      Is API Enabled
+      <span
+        className="label"
+      >
+        Is API Enabled
+      </span>
     </div>
   </div>
 </div>
@@ -43,10 +47,14 @@ exports[`SettingsModal renders with settings on 1`] = `
       />
     </div>
     <div
-      className="label"
+      className="label-wrapper"
       onClick={[Function]}
     >
-      Is API Enabled
+      <span
+        className="label"
+      >
+        Is API Enabled
+      </span>
     </div>
   </div>
 </div>

@@ -8,13 +8,21 @@ exports[`SettingsModalWrapper does not render SettingsModal 1`] = `
     className="open-modal"
     onClick={[Function]}
   >
-    Open modal
+    <span
+      className="label"
+    >
+      Open modal
+    </span>
   </div>
   <div
-    className="close-modal"
+    className="close-modal label"
     onClick={[Function]}
   >
-    Close modal
+    <span
+      className="label"
+    >
+      Close modal
+    </span>
   </div>
 </div>
 `;
@@ -27,13 +35,21 @@ exports[`SettingsModalWrapper renders SettingsModal on clicking openModal 1`] = 
     className="open-modal"
     onClick={[Function]}
   >
-    Open modal
+    <span
+      className="label"
+    >
+      Open modal
+    </span>
   </div>
   <div
-    className="close-modal"
+    className="close-modal label"
     onClick={[Function]}
   >
-    Close modal
+    <span
+      className="label"
+    >
+      Close modal
+    </span>
   </div>
 </div>
 `;

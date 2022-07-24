@@ -44,7 +44,7 @@ export class SettingsModalWrapper extends React.Component<SettingsModalWrapperPr
                 <div className='open-modal' onClick={() => this.openModal()}>
                     <span className='label'>Open modal</span>
                 </div>
-                <div className='close-modal label' onClick={() => this.closeModal()}>
+                <div className='close-modal' onClick={() => this.closeModal()}>
                     <span className='label'>Close modal</span>
                 </div>
                 {this.state.isModalOpen ? <SettingsModal messagePublisher={this.props.messagePublisher} state={this.settingsStorage} /> : <></>}
