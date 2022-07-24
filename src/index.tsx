@@ -16,7 +16,7 @@ window.settingsModalConstants = {
 };
 window.RenderSettingsModal = function(elementId: string) {
   if (isComponentRendered) {
-    throw new Error('Component SettingsModalState is already rendered!');
+    throw new Error(`Component ${SettingsModalWrapper.componentName} is already rendered!`);
   }
   let modalSettingsStorage: string | null = window.sessionStorage.getItem(sessionStorageKey);
   let modalSettings: SettingsModalState = {
@@ -39,6 +39,7 @@ window.RenderSettingsModal = function(elementId: string) {
     </React.StrictMode>
   );
   isComponentRendered = true;
+  console.log(`Component ${SettingsModalWrapper.componentName} mounted on div ${elementId}`);
 }
 
 window.DestroySettingsModal = async function(elementId: string) {
@@ -46,6 +47,7 @@ window.DestroySettingsModal = async function(elementId: string) {
     root.unmount();
     isComponentRendered = false;
     await messagePublisher.unsubscribeAll('settingsUpdated');
+    console.log(`Component ${SettingsModalWrapper.componentName} unmounted from div ${elementId}`);
     root = undefined;
   }
 }

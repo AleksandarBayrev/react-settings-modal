@@ -14,7 +14,7 @@ export type SettingsModalState = {
 
 export class SettingsModal extends React.Component<SettingsModalProps, SettingsModalState> {
     private readonly messagePublisher: IMessagePublisher;
-    private readonly componentName: string = 'SettingsModal';
+    public static readonly componentName: string = 'SettingsModal';
     constructor(props: SettingsModalProps) {
         super(props);
         this.messagePublisher = props.messagePublisher;

@@ -14,6 +14,7 @@ export type SettingsModalWrapperState = {
 
 export class SettingsModalWrapper extends React.Component<SettingsModalWrapperProps, SettingsModalWrapperState> {
     private settingsStorage: SettingsModalState
+    public static readonly componentName: string = 'SettingsModalWrapper'
     constructor(props: SettingsModalWrapperProps) {
         super(props);
         this.state = {
