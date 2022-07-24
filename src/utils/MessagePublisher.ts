@@ -9,6 +9,13 @@ export class MessagePublisher implements IMessagePublisher {
     constructor() {
         this.subscriptions = {};
     }
+
+    /**
+     * Used to call the subscribed callbacks to the topic asynchronously.
+     * @param topic the topic on which we subscribe and publish messages to
+     * @param data the data to be used in the callbacks
+     * @returns Promise with empty string
+     */
     async publish(topic: string, data?: any): Promise<string> {
         if (!this.subscriptions[topic]) {
             return Promise.reject(`No subscribers for ${topic} available`);
@@ -16,6 +23,13 @@ export class MessagePublisher implements IMessagePublisher {
         await Promise.all(this.subscriptions[topic].map(async (x) => await x(data)));
         return Promise.resolve('');
     }
+
+    /**
+     * Used to subscribe a given topic with a callback.
+     * @param topic the topic on which we subscribe and publish messages to
+     * @param callback the callback that will be added to the topic array
+     * @returns Promise with void value
+     */
     subscribe(topic: string, callback: MessagePublisherCallback): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -30,6 +44,13 @@ export class MessagePublisher implements IMessagePublisher {
             })
         });
     }
+
+    /**
+     * Unsubscribes the last callback subscribed to the topic 
+     * @throws an error when no subscribers for the given topic are available
+     * @param topic the topic on which we subscribe and publish messages to
+     * @returns Promise with void value
+     */
     unsubscribeOne(topic: string): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -41,6 +62,13 @@ export class MessagePublisher implements IMessagePublisher {
             });
         });
     }
+
+    /**
+     * Unsubscribes all callbacks subscribed to the topic 
+     * @throws an error when no subscribers for the given topic are available
+     * @param topic the topic on which we subscribe and publish messages to
+     * @returns Promise with void value
+     */
     unsubscribeAll(topic: string): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
