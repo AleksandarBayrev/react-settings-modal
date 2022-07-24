@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { sessionStorageKey } from './constants';
 import { IMessagePublisher } from './interfaces';
 import reportWebVitals from './reportWebVitals';
-import { SettingsModal, SettingsModalState } from './SettingsModal';
+import { SettingsModalState } from './SettingsModal';
 import { SettingsModalWrapper } from './SettingsModalWrapper';
 import { MessagePublisher } from './utils/MessagePublisher';
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { sessionStorageKey } from './constants';
 import { IMessagePublisher } from './interfaces';
+import './styles.css';
 
 export type SettingsModalProps = {
     messagePublisher: IMessagePublisher;
@@ -13,6 +14,7 @@ export type SettingsModalState = {
 
 export class SettingsModal extends React.Component<SettingsModalProps, SettingsModalState> {
     private readonly messagePublisher: IMessagePublisher;
+    private readonly componentName: string = 'SettingsModal';
     constructor(props: SettingsModalProps) {
         super(props);
         this.messagePublisher = props.messagePublisher;
@@ -43,9 +45,9 @@ export class SettingsModal extends React.Component<SettingsModalProps, SettingsM
                         />
                     </div>
                     <div
-                        className='label'
+                        className='label-wrapper'
                         onClick={() => this.onSettingChange('isAPIEnabled', !this.state.isAPIEnabled)}
-                    >Is API Enabled</div>
+                    ><span className='label'>Is API Enabled</span></div>
                 </div>
             </div>
         );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { IMessagePublisher } from './interfaces';
 import { SettingsModal, SettingsModalState } from './SettingsModal';
+import './styles.css';
 
 export type SettingsModalWrapperProps = {
     messagePublisher: IMessagePublisher;
@@ -40,10 +41,10 @@ export class SettingsModalWrapper extends React.Component<SettingsModalWrapperPr
         return (
             <div className='settings-modal-wrapper'>
                 <div className='open-modal' onClick={() => this.openModal()}>
-                    Open modal
+                    <span className='label'>Open modal</span>
                 </div>
-                <div className='close-modal' onClick={() => this.closeModal()}>
-                    Close modal
+                <div className='close-modal label' onClick={() => this.closeModal()}>
+                    <span className='label'>Close modal</span>
                 </div>
                 {this.state.isModalOpen ? <SettingsModal messagePublisher={this.props.messagePublisher} state={this.settingsStorage} /> : <></>}
             </div>
