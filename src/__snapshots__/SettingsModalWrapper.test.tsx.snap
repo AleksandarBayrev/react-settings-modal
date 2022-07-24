@@ -15,7 +15,7 @@ exports[`SettingsModalWrapper does not render SettingsModal 1`] = `
     </span>
   </div>
   <div
-    className="close-modal label"
+    className="close-modal"
     onClick={[Function]}
   >
     <span
@@ -42,7 +42,7 @@ exports[`SettingsModalWrapper renders SettingsModal on clicking openModal 1`] = 
     </span>
   </div>
   <div
-    className="close-modal label"
+    className="close-modal"
     onClick={[Function]}
   >
     <span
