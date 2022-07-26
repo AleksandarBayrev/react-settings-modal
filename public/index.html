@@ -17,13 +17,13 @@
         return `${x} = ${state[x]}`;
       }
       window.updateActiveSettings = function(state) {
-        let result = state.length != 0 ? 'Settings in sessionStorage:<br />' : '';
+        let result = state.length != 0 ? 'Settings in localStorage:<br />' : '';
         state.map(x => result += x + '<br />');
         document.getElementById('active-settings').innerHTML = result;
       }
       window.addEventListener('load', function() {
-        const settingsInStore = window.sessionStorage.getItem(window.settingsModalConstants.sessionStorageKey);
-        console.log(`Settings in sessionStorage: ${settingsInStore}`);
+        const settingsInStore = window.localStorage.getItem(window.settingsModalConstants.localStorageKey);
+        console.log(`Settings in localStorage: ${settingsInStore}`);
         const parsedState = JSON.parse(settingsInStore);
         window.updateActiveSettings(settingsInStore ? Object.keys(parsedState).map((x) => window.stateMapper(x, parsedState)) : ['Settings will be displayed here if present'])
       });

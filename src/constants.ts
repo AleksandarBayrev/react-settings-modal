@@ -1,1 +1,1 @@
-export const sessionStorageKey = 'settings-modal-storage';
+export const localStorageKey = 'settings-modal-storage';
