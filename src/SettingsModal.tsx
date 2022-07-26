@@ -1,5 +1,5 @@
 import React from 'react';
-import { sessionStorageKey } from './constants';
+import { localStorageKey } from './constants';
 import { IMessagePublisher } from './interfaces';
 import './styles.css';
 
@@ -30,7 +30,7 @@ export class SettingsModal extends React.Component<SettingsModalProps, SettingsM
             [settingName]: settingValue
         } as SettingsModalState);
         setTimeout(async () => {
-            window.sessionStorage.setItem(sessionStorageKey, JSON.stringify(this.state));
+            window.localStorage.setItem(localStorageKey, JSON.stringify(this.state));
             await this.messagePublisher.publish('settingsUpdated', this.state);
         });
     }

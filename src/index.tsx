@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { sessionStorageKey } from './constants';
+import { localStorageKey } from './constants';
 import { IMessagePublisher } from './interfaces';
 import reportWebVitals from './reportWebVitals';
 import { SettingsModalState } from './SettingsModal';
@@ -12,13 +12,13 @@ let isComponentRendered = false;
 let root: ReactDOM.Root | undefined 
 window.messagePublisherInstance = messagePublisher;
 window.settingsModalConstants = {
-  sessionStorageKey
+  localStorageKey
 };
 window.RenderSettingsModal = function(elementId: string) {
   if (isComponentRendered) {
     throw new Error(`Component ${SettingsModalWrapper.componentName} is already rendered!`);
   }
-  let modalSettingsStorage: string | null = window.sessionStorage.getItem(sessionStorageKey);
+  let modalSettingsStorage: string | null = window.localStorage.getItem(localStorageKey);
   let modalSettings: SettingsModalState = {
     isAPIEnabled: false,
     defaultText: ''
