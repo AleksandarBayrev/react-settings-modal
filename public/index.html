@@ -22,6 +22,11 @@
         document.getElementById('active-settings').innerHTML = result;
       }
       window.addEventListener('load', function() {
+        window.addEventListener('storage', async function () {
+          const localStorageData = JSON.parse(window.localStorage.getItem(window.settingsModalConstants.localStorageKey));
+          await window.messagePublisherInstance.publish(window.settingsModalConstants.storeUpdateKey, localStorageData);
+          window.updateActiveSettings(Object.keys(localStorageData).map((x) => window.stateMapper(x, localStorageData)));
+        });
         const settingsInStore = window.localStorage.getItem(window.settingsModalConstants.localStorageKey);
         console.log(`Settings in localStorage: ${settingsInStore}`);
         const parsedState = JSON.parse(settingsInStore);

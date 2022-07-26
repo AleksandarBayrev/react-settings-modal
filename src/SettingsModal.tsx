@@ -1,5 +1,5 @@
 import React from 'react';
-import { localStorageKey } from './constants';
+import { localStorageKey, storeUpdateKey } from './constants';
 import { IMessagePublisher } from './interfaces';
 import './styles.css';
 
@@ -23,6 +23,19 @@ export class SettingsModal extends React.Component<SettingsModalProps, SettingsM
             isAPIEnabled: props.state.isAPIEnabled,
             defaultText: props.state.defaultText
         };
+    }
+
+    async componentDidMount() {
+        await this.messagePublisher.subscribe(storeUpdateKey, async (data: SettingsModalState) => {
+            this.setState({
+                ...this.state,
+                ...data
+            });
+        });
+    }
+
+    async componentWillUnmount() {
+        await this.messagePublisher.unsubscribeAll(storeUpdateKey);
     }
 
     private onSettingChange(settingName: keyof SettingsModalState, settingValue: any) {

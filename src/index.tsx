@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { localStorageKey } from './constants';
+import { localStorageKey, storeUpdateKey } from './constants';
 import { IMessagePublisher } from './interfaces';
 import reportWebVitals from './reportWebVitals';
 import { SettingsModalState } from './SettingsModal';
@@ -12,7 +12,8 @@ let isComponentRendered = false;
 let root: ReactDOM.Root | undefined 
 window.messagePublisherInstance = messagePublisher;
 window.settingsModalConstants = {
-  localStorageKey
+  localStorageKey,
+  storeUpdateKey
 };
 window.RenderSettingsModal = function(elementId: string) {
   if (isComponentRendered) {
