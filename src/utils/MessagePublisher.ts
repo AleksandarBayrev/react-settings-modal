@@ -20,7 +20,7 @@ export class MessagePublisher implements IMessagePublisher {
         if (!this.subscriptions[topic]) {
             return Promise.reject(`No subscribers for ${topic} available`);
         }
-        await Promise.all(this.subscriptions[topic].map(async (x) => await x(data)));
+        await Promise.all(this.subscriptions[topic].map((x) => x(data)));
         return Promise.resolve('');
     }
 
